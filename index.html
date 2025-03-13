@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head><!--tag head é a config do html-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brainstorming</title>
+   <style>
+
+        body{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                background-color: #464649;
+                padding: 25px;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+        }
+        .titulos {
+            color:aliceblue;
+            padding: 20PX;
+        }
+        
+        #date_area{
+            padding: 20px;
+        }
+        #date_area input{
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #3d3d3d;
+            border-radius: 5px;
+        }
+        #date_area .limpar{
+            padding: 15px 15px ;
+            font-size: 16px;
+            border: none;
+            background-color: #db0b0b;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer ;
+            margin-left: 10px;
+        }
+           
+        
+        
+        #date_area #add {
+            padding: 15px 15px ;
+            font-size: 16px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer ;
+            margin-left: 10px; 
+        }
+        #mural{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+
+
+
+        }
+        .cartao-ideia{
+            background: #FFF;
+            padding: 5px;
+            border-radius: 8px;
+            box-shadow:0px 0px 8px rgba(108, 76, 184, 0.986);
+            width: 200px;
+            opacity: 1;
+            /*Word-break: break-all; quebra uma palavra ao meio se necessario */
+            white-space:break-space; /*quebra a frase apenas nos espaços, difente do break-all, que quebra a palavra no meio*/
+            animation: fadeIn 1s forwards
+        }
+            @keyframes fadeIn {
+                from {opacity: 0; transform: translateX(20px);}
+                to {opacity: 1; transform: translateY(20px);}
+            }
+
+   </style>
+    <link rel="shortcut icon" type="img/png"
+     href="https://static.semrush.com/blog/uploads/media/d2/75/d275349647c50f880120d319275dd70c/brainstorming-sm.svg"/>
+</head>
+
+
+
+<body>
+    <div class="titulos"> <h1> Mural of  Ideas </h1><br>
+    <i><h2>Anote suas ideias</h2></i><br></div>
+  <div  class="area_dados" id="date_area"> <!--Class é uma identificação que posso reutilizar, id é a "identidade"-->
+    <input type="text" id="put_idea" placeholder="Digite sua ideia...">
+   <button onclick= "adicionarIdeia()" type="submit" id="add"> Adicione uma Nota</button> 
+   <button  onclick="limparideia()"     id="rem"   class= "limpar">Remover tudo</button>
+  </div>
+
+<div id="mural"></div>
+
+
+  <script>
+
+    document.getElementById('put_idea').addEventListener('keypress',function (event)    {
+        if (event.key=='Enter'){
+            adicionarIdeia();
+        }
+    });
+    //criando uma função e define as contantes
+
+    function adicionarIdeia(){
+
+        const input = document.getElementById("put_idea")
+        const idea = input.value 
+
+         if (idea === ''){
+            alert("Este campo de ideia não pode estar vazio, por favor adicione um texto!")
+            return
+        }
+
+
+         const cardIdea = document.createElement("div")
+        cardIdea.className = "cartao-ideia"
+        cardIdea.style.borderLeft = `5px solid ${corAleatoria()}`
+        cardIdea.textContent = idea
+
+        document.getElementById("mural").appendChild(cardIdea)
+        input.value = ""
+    }
+        function limparideia(){
+        document.getElementById("mural").innerHTML = ""
+     }
+     
+     function corAleatoria (){
+        const letters = '0123456789ABCDEF'
+        let color = '#'
+        for (let i = 0; i < 6; i++){
+        color += letters [Math.floor(Math.random() *16)]
+
+     }
+        return color;
+    }
+
+  </script>
+
+
+</body>
+</html>
+   
